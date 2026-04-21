@@ -1,112 +1,233 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Solidarité Médicale et Chirurgicale</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f7f7f7;
-}
-
-header {
-    background: #c1121f;
-    color: white;
-    padding: 40px;
-    text-align: center;
-}
-
-.section {
-    padding: 40px;
-    margin: 20px;
-    background: white;
-    border-radius: 10px;
-}
-
-button {
-    background: #c1121f;
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.progress {
-    background: #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 20px;
-}
-
-.bar {
-    width: 60%;
-    background: #2a9d8f;
-    height: 100%;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solidarité Médicale et Chirurgicale</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --accent: #ff4d4d;
+            --dark: #1a1a1a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        header {
+            background: rgba(255,255,255,0.97);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 0;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .logo svg {
+            width: 42px;
+            height: 42px;
+        }
+        .nav-links a {
+            margin-left: 28px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://picsum.photos/id/1015/1920/1080') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero-content {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3.1rem;
+            margin-bottom: 25px;
+        }
+        .hero p {
+            font-size: 1.35rem;
+            margin-bottom: 35px;
+        }
+        .keywords {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 40px 0 35px;
+        }
+        .keywords span {
+            margin: 0 14px;
+            white-space: nowrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 16px 45px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #e60000;
+            transform: translateY(-3px);
+        }
+        section {
+            padding: 90px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2.6rem;
+            margin-bottom: 45px;
+            color: var(--primary);
+        }
+        form {
+            max-width: 680px;
+            margin: 0 auto;
+            display: grid;
+            gap: 18px;
+        }
+        input, textarea {
+            padding: 14px 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.05rem;
+        }
+        button {
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.4rem; }
+            .keywords { font-size: 1.05rem; }
+            .nav-links a { margin-left: 15px; font-size: 0.98rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-<h1>Solidarité Médicale et Chirurgicale</h1>
-<p>Financer des opérations vitales pour sauver des vies</p>
-</header>
+    <!-- Header avec logo amélioré -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <!-- Icône médicale simple (cœur + croix) -->
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z"/>
+                    <path d="M19 3H5V5H19V3Z" fill="#ff4d4d"/>
+                </svg>
+                Solidarité Médicale et Chirurgicale
+            </a>
+            <div class="nav-links">
+                <a href="#mission">Mission</a>
+                <a href="#cas-urgent">Cas Urgent</a>
+                <a href="#transparence">Transparence</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
 
-<div class="section">
-<h2>💔 Chaque jour, des vies pourraient être sauvées</h2>
-<p>Des patients meurent faute d'argent pour une opération.</p>
-<p><strong>Nous avons décidé d’agir.</strong></p>
-<button onclick="window.location.href='#don'">Faire un don</button>
-</div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Solidarité Médicale : Agir face à l'urgence vitale</h1>
+            <p>Parce que l'accès aux soins ne doit pas être un privilège</p>
+            <p>Chaque jour, des patients perdent la vie faute de moyens pour une opération vitale.</p>
+            
+            <div class="keywords">
+                Solidarité • Transparence • Soins Critiques • Impact Direct • Engagement Humain
+            </div>
+            
+            <a href="#contact" class="btn">Faire un don maintenant</a>
+        </div>
+    </section>
 
-<div class="section">
-<h2>👶 Cas urgent</h2>
-<p><strong>Prénom :</strong> À compléter</p>
-<p><strong>Maladie :</strong> À compléter</p>
-<p><strong>Urgence :</strong> opération rapide nécessaire</p>
-<p><strong>Objectif :</strong> 7 500€</p>
+    <!-- Mission -->
+    <section id="mission">
+        <h2>Notre Mission</h2>
+        <p style="text-align:center; max-width:800px; margin:0 auto; font-size:1.2rem;">
+            Nous collectons des fonds en France pour financer directement des opérations médicales et chirurgicales vitales, en France, au Maroc et dans une large mesure possible à l'international.
+        </p>
+    </section>
 
-<div class="progress">
-<div class="bar"></div>
-</div>
+    <!-- Cas Urgent -->
+    <section id="cas-urgent" style="background:#f9f9f9;">
+        <h2>Cas Urgent</h2>
+        <div style="background:#fff0f0; border:2px solid #ff4d4d; border-radius:15px; padding:40px; max-width:700px; margin:0 auto; text-align:center;">
+            <h3>Yassine, 6 ans – Malformation cardiaque</h3>
+            <p style="font-size:2.4rem; font-weight:bold; color:#ff4d4d; margin:15px 0;">7 500 €</p>
+            <p style="margin:15px 0;">Objectif à atteindre sous 30 jours</p>
+            <a href="#" class="btn">Soutenir ce cas</a>
+        </div>
+    </section>
 
-<p>✔️ Dossier médical vérifié</p>
+    <!-- Transparence -->
+    <section id="transparence">
+        <h2>Une Transparence Totale</h2>
+        <p style="text-align:center; max-width:900px; margin:0 auto; font-size:1.15rem;">
+            Tous les dons sont utilisés directement pour les soins. Dossiers médicaux vérifiés par des professionnels.<br>
+            <strong>100 % des fonds vont aux opérations.</strong>
+        </p>
+    </section>
 
-<button id="don">Faire un don</button>
-</div>
+    <!-- Formulaire de contact -->
+    <section id="contact" style="background:#f9f9f9;">
+        <h2>Contactez-nous</h2>
+        <form action="https://formsubmit.co/contact-solidarite-medicale@gmail.com" method="POST">
+            <input type="text" name="name" placeholder="Votre nom complet" required>
+            <input type="email" name="email" placeholder="Votre adresse email" required>
+            <input type="text" name="subject" placeholder="Sujet de votre message" required>
+            <textarea name="message" rows="7" placeholder="Votre message..." required></textarea>
+            <button type="submit">Envoyer le message</button>
+            
+            <input type="hidden" name="_next" value="https://solidaritemedicaleetchirurgicale.com/merci.html">
+            <input type="hidden" name="_captcha" value="false">
+        </form>
+    </section>
 
-<div class="section">
-<h2>🎯 Notre mission</h2>
-<p>Nous aidons les personnes sans moyens à accéder à des opérations vitales.</p>
-<p>Collecte en France — soins en France et au Maroc.</p>
-</div>
-
-<div class="section">
-<h2>🔒 Transparence</h2>
-<p>✔️ Paiement direct aux hôpitaux</p>
-<p>✔️ Aucun argent donné aux patients</p>
-<p>✔️ Dossiers vérifiés</p>
-</div>
-
-<div class="section">
-<h2>📩 Contact</h2>
-<p>Email : contact@solidaritemedicaleetchirurgicale.com</p>
-</div>
-
-<footer>
-© 2026 Solidarité Médicale et Chirurgicale
-</footer>
+    <!-- Footer -->
+    <footer>
+        <p><strong>Solidarité Médicale et Chirurgicale</strong> © 2026 – Tous droits réservés</p>
+    </footer>
 
 </body>
 </html>
